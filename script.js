@@ -29,7 +29,16 @@ btnCalcular.addEventListener('click', () => {
   });
 
   if (cantidad === 0) {
-    alert('Ingresa al menos una nota.');
+    notas.forEach(input => {
+      input.style.border = '2px solid #dc2626';
+      input.style.background = '#fff5f5';
+    });
+    setTimeout(() => {
+      notas.forEach(input => {
+        input.style.border = 'none';
+        input.style.background = 'rgba(255,255,255,0.95)';
+      });
+    }, 2000);
     return;
   }
 
