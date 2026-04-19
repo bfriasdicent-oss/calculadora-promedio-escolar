@@ -6,55 +6,67 @@
 
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: #f0f4f8;
-  color: #333;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 header {
-  background: #2563eb;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
   color: white;
   text-align: center;
-  padding: 40px 20px;
+  padding: 50px 20px 30px;
+  width: 100%;
+  animation: fadeDown 0.8s ease;
 }
 
 header h1 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin-bottom: 10px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 header p {
   font-size: 1rem;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 main {
-  max-width: 600px;
-  margin: 40px auto;
+  width: 100%;
+  max-width: 620px;
+  margin: 30px auto;
   padding: 0 20px;
+  animation: fadeUp 0.8s ease;
 }
 
 .materia {
   display: flex;
   gap: 10px;
   margin-bottom: 12px;
+  animation: fadeIn 0.4s ease;
 }
 
 .materia input {
-  padding: 12px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
   font-size: 1rem;
-  transition: border 0.2s;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.materia input:focus {
+  outline: none;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
 .nombre-materia { flex: 2; }
 .nota { flex: 1; }
-
-.materia input:focus {
-  outline: none;
-  border-color: #2563eb;
-}
 
 .botones {
   display: flex;
@@ -63,52 +75,82 @@ main {
 }
 
 button {
-  padding: 12px 20px;
+  padding: 14px 20px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 1rem;
   cursor: pointer;
   font-weight: bold;
-  transition: opacity 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-button:hover { opacity: 0.85; }
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+button:active { transform: translateY(0); }
 
 #agregar {
-  background: #e2e8f0;
-  color: #333;
+  background: rgba(255,255,255,0.9);
+  color: #764ba2;
 }
 
 #calcular {
-  background: #2563eb;
-  color: white;
+  background: white;
+  color: #667eea;
   flex: 1;
+  font-size: 1.1rem;
 }
 
 #resultado {
-  background: white;
-  border-radius: 12px;
-  padding: 30px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 20px;
+  padding: 35px;
   text-align: center;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
   margin-top: 20px;
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 #resultado h2 {
   font-size: 1.8rem;
   margin-bottom: 10px;
+  color: #333;
 }
 
 #promedio-valor {
-  color: #2563eb;
+  color: #667eea;
+  font-size: 2.5rem;
+  font-weight: 900;
 }
 
 #estado {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: bold;
+  margin-top: 10px;
 }
 
 .aprobado { color: #16a34a; }
 .reprobado { color: #dc2626; }
-
 .oculto { display: none; }
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
