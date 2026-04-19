@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f4f8;
+  color: #333;
+  min-height: 100vh;
+}
+
+header {
+  background: #2563eb;
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+main {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.materia {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.materia input {
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+.nombre-materia { flex: 2; }
+.nota { flex: 1; }
+
+.materia input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.botones {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+
+button:hover { opacity: 0.85; }
+
+#agregar {
+  background: #e2e8f0;
+  color: #333;
+}
+
+#calcular {
+  background: #2563eb;
+  color: white;
+  flex: 1;
+}
+
+#resultado {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  margin-top: 20px;
+}
+
+#resultado h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+#promedio-valor {
+  color: #2563eb;
+}
+
+#estado {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.aprobado { color: #16a34a; }
+.reprobado { color: #dc2626; }
+
+.oculto { display: none; }
