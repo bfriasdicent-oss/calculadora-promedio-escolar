@@ -3,53 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9JET1QQKVZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-9JET1QQKVZ');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JET1QQKVZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9JET1QQKVZ');
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Calcula tu promedio escolar gratis y al instante. Ingresa tus notas y obtén tu promedio en segundos. Herramienta gratis para estudiantes."><title>Calculadora de Promedio Escolar Gratis | Calcula tus Notas</title>
+  <meta name="description" content="Calcula tu promedio escolar gratis y al instante. Ingresa tus notas y obtén tu promedio en segundos.">
   <meta property="og:title" content="Calculadora de Promedio Escolar Gratis">
-<meta property="og:description" content="Calcula tu promedio escolar al instante. Gratis y fácil de usar.">
-<meta property="og:url" content="https://bfriasdicent-oss.github.io/calculadora-promedio-escolar">
-<meta property="og:type" content="website">
+  <meta property="og:description" content="Calcula tu promedio escolar al instante. Gratis y fácil de usar.">
+  <meta property="og:url" content="https://bfriasdicent-oss.github.io/calculadora-promedio-escolar">
+  <meta property="og:type" content="website">
   <title>Calculadora de Promedio Escolar Gratis | Calcula tus Notas</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✏️</text></svg>"
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✏️</text></svg>">
 </head>
 <body>
 
   <header>
-  <h1>📚 Calculadora de Promedio Escolar</h1>
+    <h1>✏️ Calculadora de Promedio Escolar</h1>
     <p>Ingresa tus notas y calcula tu promedio al instante</p>
   </header>
 
-  <main>
-    <section class="info">
-    <div class="info-card">
+  <section class="info">
+    <div class="info-card" style="animation-delay: 0.1s">
       <span>📝</span>
       <h3>¿Cómo usarlo?</h3>
-      <p>Escribe el nombre de tu materia y su nota. Agrega todas las que necesites.</p>
+      <p>Escribe el nombre de tu materia y su nota.</p>
     </div>
-    <div class="info-card">
+    <div class="info-card" style="animation-delay: 0.3s">
       <span>➕</span>
       <h3>Agrega materias</h3>
-      <p>Haz clic en "+ Agregar Materia" para añadir más asignaturas.</p>
+      <p>Haz clic en "+ Agregar Materia" para añadir más.</p>
     </div>
-    <div class="info-card">
+    <div class="info-card" style="animation-delay: 0.5s">
       <span>🏆</span>
       <h3>Tu resultado</h3>
-      <p>Necesitas 70 o más para aprobar. Te diremos si pasaste al instante.</p>
+      <p>Necesitas 70 o más para aprobar.</p>
     </div>
   </section>
 
-  <footer>
-    <p>✏️ Calculadora de Promedio Escolar — Gratis para siempre</p>
-  </footer>
+  <main>
     <div id="materias-container">
       <div class="materia">
         <input type="text" placeholder="Materia (ej: Matemáticas)" class="nombre-materia">
@@ -67,6 +63,10 @@
       <p id="estado"></p>
     </div>
   </main>
+
+  <footer>
+    <p>✏️ Calculadora de Promedio Escolar — Gratis para siempre</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
