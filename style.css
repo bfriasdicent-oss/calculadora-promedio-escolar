@@ -1,185 +1,34 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-header {
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
-  color: white;
-  text-align: center;
-  padding: 50px 20px 30px;
-  width: 100%;
-  animation: fadeDown 0.8s ease;
-}
-
-header h1 {
-  font-size: 2.2rem;
-  margin-bottom: 10px;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-}
-
-header p {
-  font-size: 1rem;
-  opacity: 0.9;
-}
-
-main {
-  width: 100%;
-  max-width: 620px;
-  margin: 30px auto;
-  padding: 0 20px;
-  animation: fadeUp 0.8s ease;
-}
-
-.materia {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 12px;
-  animation: fadeIn 0.4s ease;
-}
-
-.materia input {
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  background: rgba(255,255,255,0.95);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.materia input:focus {
-  outline: none;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+header { background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); color: white; text-align: center; padding: 50px 20px 30px; width: 100%; animation: fadeDown 0.8s ease; }
+header h1 { font-size: 2.2rem; margin-bottom: 10px; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+header p { font-size: 1rem; opacity: 0.9; }
+.info { display: flex; gap: 20px; max-width: 620px; width: 100%; margin: 30px auto 0; padding: 0 20px; flex-wrap: wrap; }
+.info-card { flex: 1; min-width: 150px; background: rgba(255,255,255,0.15); border-radius: 16px; padding: 20px; text-align: center; color: white; opacity: 0; animation: fadeUp 0.6s ease forwards; }
+.info-card span { font-size: 2rem; display: block; margin-bottom: 8px; }
+.info-card h3 { margin: 0 0 5px; font-size: 1rem; }
+.info-card p { font-size: 0.85rem; opacity: 0.9; margin: 0; }
+main { width: 100%; max-width: 620px; margin: 30px auto; padding: 0 20px; animation: fadeUp 0.8s ease 0.6s both; }
+.materia { display: flex; gap: 10px; margin-bottom: 12px; animation: fadeIn 0.4s ease; }
+.materia input { padding: 14px; border: none; border-radius: 12px; font-size: 1rem; background: rgba(255,255,255,0.95); box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; }
+.materia input:focus { outline: none; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
 .nombre-materia { flex: 2; }
 .nota { flex: 1; }
-
-.botones {
-  display: flex;
-  gap: 10px;
-  margin: 20px 0;
-}
-
-button {
-  padding: 14px 20px;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  cursor: pointer;
-  font-weight: bold;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-}
-
+.botones { display: flex; gap: 10px; margin: 20px 0; }
+button { padding: 14px 20px; border: none; border-radius: 12px; font-size: 1rem; cursor: pointer; font-weight: bold; transition: transform 0.2s, box-shadow 0.2s; }
+button:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
 button:active { transform: translateY(0); }
-
-#agregar {
-  background: rgba(255,255,255,0.9);
-  color: #764ba2;
-}
-
-#calcular {
-  background: white;
-  color: #667eea;
-  flex: 1;
-  font-size: 1.1rem;
-}
-
-#resultado {
-  background: rgba(255,255,255,0.95);
-  border-radius: 20px;
-  padding: 35px;
-  text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-  margin-top: 20px;
-  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-#resultado h2 {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-#promedio-valor {
-  color: #667eea;
-  font-size: 2.5rem;
-  font-weight: 900;
-}
-
-#estado {
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
+#agregar { background: rgba(255,255,255,0.9); color: #764ba2; }
+#calcular { background: white; color: #667eea; flex: 1; font-size: 1.1rem; }
+#resultado { background: rgba(255,255,255,0.95); border-radius: 20px; padding: 35px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.2); margin-top: 20px; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+#resultado h2 { font-size: 1.8rem; margin-bottom: 10px; color: #333; }
+#promedio-valor { color: #667eea; font-size: 2.5rem; font-weight: 900; }
+#estado { font-size: 1.3rem; font-weight: bold; margin-top: 10px; }
 .aprobado { color: #16a34a; }
 .reprobado { color: #dc2626; }
 .oculto { display: none; }
-
-@keyframes fadeDown {
-  from { opacity: 0; transform: translateY(-30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateX(-10px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes popIn {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
-}
-.info {
-  display: flex;
-  gap: 20px;
-  max-width: 620px;
-  margin: 0 auto 30px;
-  padding: 0 20px;
-  flex-wrap: wrap;
-}
-
-.info-card {
-  flex: 1;
-  min-width: 150px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 16px;
-  padding: 20px;
-  text-align: center;
-  color: white;
-}
-
-.info-card span { font-size: 2rem; }
-.info-card h3 { margin: 10px 0 5px; font-size: 1rem; }
-.info-card p { font-size: 0.85rem; opacity: 0.9; }
-
-footer {
-  text-align: center;
-  color: rgba(255,255,255,0.7);
-  padding: 20px;
-  font-size: 0.9rem;
-}
+footer { text-align: center; color: rgba(255,255,255,0.7); padding: 20px; font-size: 0.9rem; margin-top: auto; }
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes popIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
