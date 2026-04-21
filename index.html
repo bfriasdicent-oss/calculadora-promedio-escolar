@@ -1,73 +1,268 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9JET1QQKVZ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-9JET1QQKVZ');
-  </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Calcula tu promedio escolar gratis y al instante. Ingresa tus notas y obtén tu promedio en segundos.">
-  <meta property="og:title" content="Calculadora de Promedio Escolar Gratis">
-  <meta property="og:description" content="Calcula tu promedio escolar al instante. Gratis y fácil de usar.">
-  <meta property="og:url" content="https://bfriasdicent-oss.github.io/calculadora-promedio-escolar">
-  <meta property="og:type" content="website">
-  <title>Nexus — Calcula tu Promedio</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✏️</text></svg>">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nexus — Calcula tu Promedio</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%234f46e5'/><text y='.85em' font-size='65' x='12'>🧮</text></svg>">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9JET1QQKVZ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-9JET1QQKVZ');</script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#07080f;--s1:#0d0f1e;--s2:#12152a;--accent:#4f46e5;--accent2:#06b6d4;--accent3:#10b981;--accent4:#f59e0b;--danger:#ef4444;--text:#f0f0ff;--muted:#7b7fa8;--border:rgba(79,70,229,.15);--r:14px;--font:system-ui,-apple-system,'Segoe UI',sans-serif}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;overflow-x:hidden}
+.mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.mesh-blob{position:absolute;border-radius:50%;filter:blur(120px);opacity:.1;animation:blobFloat var(--d,12s) ease-in-out infinite var(--delay,0s)}
+.b1{width:700px;height:700px;background:#4f46e5;top:-250px;left:-150px;--d:16s}
+.b2{width:500px;height:500px;background:#06b6d4;bottom:-150px;right:-100px;--d:20s;--delay:4s}
+.b3{width:350px;height:350px;background:#10b981;top:50%;left:50%;--d:18s;--delay:8s}
+@keyframes blobFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(25px,-25px)}}
+header{position:sticky;top:0;z-index:100;padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(7,8,15,.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;letter-spacing:-.02em}
+.logo-mark{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.95rem}
+.logo-text{background:linear-gradient(135deg,#fff,rgba(255,255,255,.7));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header-sub{font-size:.75rem;color:var(--muted);font-weight:500}
+main{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:3rem 1.5rem 5rem}
+.hero{text-align:center;padding:2.5rem 0 2rem;animation:fadeUp .7s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:rgba(79,70,229,.12);border:1px solid rgba(79,70,229,.3);border-radius:20px;padding:.3rem .9rem;font-size:.78rem;font-weight:600;color:#818cf8;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.2rem}
+.hero-eyebrow::before{content:'';width:6px;height:6px;background:#818cf8;border-radius:50%;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;margin-bottom:.75rem}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,#818cf8,var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1rem;color:var(--muted);line-height:1.7}
+
+/* CALCULATOR CARD */
+.calc-card{background:var(--s1);border:1px solid var(--border);border-radius:24px;padding:2rem;margin:2rem 0;animation:fadeUp .7s .15s ease both}
+
+.subjects-list{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.5rem}
+
+.subject-row{display:grid;grid-template-columns:1fr 140px 44px;gap:.6rem;align-items:center;animation:slideIn .3s ease both}
+@keyframes slideIn{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
+
+.subject-row input{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:.7rem 1rem;color:var(--text);font-family:var(--font);font-size:.92rem;font-weight:500;width:100%;outline:none;transition:border-color .2s,box-shadow .2s}
+.subject-row input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,70,229,.15)}
+.subject-row input::placeholder{color:var(--muted)}
+.subject-row input[type=number]{text-align:center}
+
+.btn-remove{width:44px;height:44px;background:none;border:1px solid var(--border);border-radius:10px;color:var(--muted);cursor:pointer;font-size:1.1rem;transition:all .2s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.btn-remove:hover{border-color:var(--danger);color:var(--danger);background:rgba(239,68,68,.08)}
+
+.calc-actions{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1rem}
+
+.btn-add{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:.8rem;color:var(--text);font-family:var(--font);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.btn-add:hover{border-color:var(--accent);background:rgba(79,70,229,.1)}
+
+.btn-calc{background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:12px;padding:.8rem;color:#fff;font-family:var(--font);font-size:.9rem;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.btn-calc:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(79,70,229,.4)}
+.btn-calc:active{transform:scale(.98)}
+
+/* RESULT */
+.result-card{background:var(--s1);border:1px solid var(--border);border-radius:24px;padding:2.5rem;text-align:center;margin:1.5rem 0;display:none;animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes popIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+.result-card.show{display:block}
+
+.result-label{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.5rem}
+.result-num{font-size:5rem;font-weight:800;letter-spacing:-.05em;line-height:1;margin-bottom:.5rem}
+.result-num.pass{background:linear-gradient(135deg,var(--accent3),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.result-num.fail{background:linear-gradient(135deg,var(--danger),#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.result-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem 1.2rem;border-radius:20px;font-size:.85rem;font-weight:700;margin-bottom:1rem}
+.result-badge.pass{background:rgba(16,185,129,.15);color:var(--accent3)}
+.result-badge.fail{background:rgba(239,68,68,.15);color:var(--danger)}
+.result-msg{font-size:.9rem;color:var(--muted);line-height:1.6}
+
+/* SUBJECT BREAKDOWN */
+.breakdown{margin-top:1.5rem;display:flex;flex-direction:column;gap:.5rem}
+.breakdown-item{background:var(--s2);border-radius:10px;padding:.7rem 1rem;display:flex;align-items:center;justify-content:space-between;font-size:.85rem}
+.breakdown-name{font-weight:600;color:var(--text)}
+.breakdown-score{font-weight:700;padding:.2rem .6rem;border-radius:6px;font-size:.8rem}
+.score-high{background:rgba(16,185,129,.15);color:var(--accent3)}
+.score-mid{background:rgba(245,158,11,.15);color:var(--accent4)}
+.score-low{background:rgba(239,68,68,.15);color:var(--danger)}
+
+.btn-reset{background:none;border:1px solid var(--border);border-radius:10px;padding:.6rem 1.2rem;color:var(--muted);font-family:var(--font);font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;margin-top:1rem}
+.btn-reset:hover{border-color:var(--accent);color:var(--text)}
+
+/* HOW IT WORKS */
+.how-section{margin:3rem 0;animation:fadeUp .7s .3s ease both}
+.section-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-weight:600;margin-bottom:1.25rem}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+.step{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;text-align:center;transition:border-color .2s,transform .2s}
+.step:hover{border-color:rgba(79,70,229,.35);transform:translateY(-2px)}
+.step-icon{font-size:1.5rem;margin-bottom:.6rem;display:block}
+.step-title{font-size:.88rem;font-weight:700;margin-bottom:.3rem}
+.step-desc{font-size:.78rem;color:var(--muted);line-height:1.5}
+
+/* PLANIFY BANNER */
+.planify-banner{background:linear-gradient(135deg,rgba(79,70,229,.1),rgba(6,182,212,.1));border:1px solid rgba(79,70,229,.2);border-radius:20px;padding:1.5rem 2rem;margin-top:3rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;animation:fadeUp .7s .4s ease both}
+.banner-text h3{font-size:.95rem;font-weight:700;margin-bottom:.25rem}
+.banner-text p{font-size:.82rem;color:var(--muted)}
+.banner-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:10px;padding:.6rem 1.25rem;color:#fff;font-family:var(--font);font-weight:700;font-size:.85rem;cursor:pointer;text-decoration:none;white-space:nowrap;display:inline-block;transition:transform .15s,box-shadow .2s}
+.banner-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(79,70,229,.35)}
+
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:.75rem 1.1rem;font-size:.85rem;font-weight:600;z-index:999;transform:translateY(80px);opacity:0;transition:all .3s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.toast.show{transform:translateY(0);opacity:1}
+
+@media(max-width:600px){
+  header{padding:0 1rem}
+  main{padding:2rem 1rem 4rem}
+  .calc-actions{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .planify-banner{flex-direction:column;text-align:center}
+  .subject-row{grid-template-columns:1fr 100px 40px}
+}
+</style>
 </head>
 <body>
+<div class="mesh"><div class="mesh-blob b1"></div><div class="mesh-blob b2"></div><div class="mesh-blob b3"></div></div>
+<div class="toast" id="toast"></div>
 
-  <header>
-    <h1>✏️ Nexus</h1>
-    <p>Ingresa tus notas y calcula tu promedio al instante</p>
-  </header>
+<header>
+  <div class="logo">
+    <div class="logo-mark">🧮</div>
+    <span class="logo-text">Nexus</span>
+  </div>
+  <span class="header-sub">Calculadora de promedio</span>
+</header>
 
-  <section class="info">
-    <div class="info-card" style="animation-delay: 0.1s">
-      <span>📝</span>
-      <h3>¿Cómo usarlo?</h3>
-      <p>Escribe el nombre de tu materia y su nota.</p>
+<main>
+  <div class="hero">
+    <div class="hero-eyebrow">Gratis · Sin registro · Instantáneo</div>
+    <h1>Calcula tu<br><em>promedio escolar</em></h1>
+    <p>Ingresa tus materias y notas. Tu promedio en segundos.</p>
+  </div>
+
+  <div class="calc-card">
+    <div class="subjects-list" id="subjects-list"></div>
+    <div class="calc-actions">
+      <button class="btn-add" onclick="addSubject()">＋ Agregar materia</button>
+      <button class="btn-calc" onclick="calculate()">⚡ Calcular promedio</button>
     </div>
-    <div class="info-card" style="animation-delay: 0.3s">
-      <span>➕</span>
-      <h3>Agrega materias</h3>
-      <p>Haz clic en "+ Agregar Materia" para añadir más.</p>
-    </div>
-    <div class="info-card" style="animation-delay: 0.5s">
-      <span>🏆</span>
-      <h3>Tu resultado</h3>
-      <p>Necesitas 70 o más para aprobar.</p>
-    </div>
-  </section>
+  </div>
 
-  <main>
-    <div id="materias-container">
-      <div class="materia">
-        <input type="text" placeholder="Materia (ej: Matemáticas)" class="nombre-materia">
-        <input type="number" placeholder="Nota (0-100)" class="nota" min="0" max="100">
-      </div>
+  <div class="result-card" id="result-card">
+    <div class="result-label">Tu promedio es</div>
+    <div class="result-num" id="result-num">0</div>
+    <div class="result-badge" id="result-badge"></div>
+    <div class="result-msg" id="result-msg"></div>
+    <div class="breakdown" id="breakdown"></div>
+    <button class="btn-reset" onclick="reset()">↩ Calcular de nuevo</button>
+  </div>
+
+  <div class="how-section">
+    <div class="section-label">¿Cómo funciona?</div>
+    <div class="steps">
+      <div class="step"><span class="step-icon">✏️</span><div class="step-title">Escribe tu materia</div><div class="step-desc">Agrega el nombre de cada asignatura</div></div>
+      <div class="step"><span class="step-icon">🔢</span><div class="step-title">Ingresa tu nota</div><div class="step-desc">En escala del 0 al 100</div></div>
+      <div class="step"><span class="step-icon">🏆</span><div class="step-title">Ve tu promedio</div><div class="step-desc">Necesitas 70 o más para aprobar</div></div>
     </div>
+  </div>
 
-    <div class="botones">
-      <button id="agregar">+ Agregar Materia</button>
-      <button id="calcular">Calcular Promedio</button>
+  <div class="planify-banner">
+    <div class="banner-text">
+      <h3>📅 ¿Tienes tareas pendientes?</h3>
+      <p>Planify — organiza tu agenda escolar gratis.</p>
     </div>
+    <a href="https://bfriasdicent-oss.github.io/planify/" target="_blank" class="banner-btn">Ir a Planify →</a>
+  </div>
+</main>
 
-    <div id="resultado" class="oculto">
-      <h2>Tu promedio es: <span id="promedio-valor"></span></h2>
-      <p id="estado"></p>
-    </div>
-  </main>
+<script>
+let subjects=[];
 
-  <footer>
-    <p>✏️ Nexus — Gratis para siempre</p>
-  </footer>
+function createRow(id,name='',note=''){
+  const row=document.createElement('div');
+  row.className='subject-row';
+  row.id=`row-${id}`;
+  row.innerHTML=`
+    <input type="text" placeholder="Materia (ej: Matemáticas)" value="${name}" id="name-${id}">
+    <input type="number" placeholder="Nota (0-100)" min="0" max="100" value="${note}" id="note-${id}">
+    <button class="btn-remove" onclick="removeSubject(${id})" title="Eliminar">✕</button>
+  `;
+  return row;
+}
 
-  <script src="script.js"></script>
-<div style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:999"><a href="https://bfriasdicent-oss.github.io/planify/" target="_blank" style="background:linear-gradient(135deg,#4f8ef7,#f7934f);color:#fff;font-family:Trebuchet MS,sans-serif;font-weight:700;font-size:.9rem;padding:.7rem 1.2rem;border-radius:12px;text-decoration:none;box-shadow:0 4px 20px rgba(79,142,247,.4);display:flex;align-items:center;gap:.5rem">📅 Agenda Escolar</a></div></body>
+function addSubject(name='',note=''){
+  const id=Date.now();
+  subjects.push(id);
+  document.getElementById('subjects-list').appendChild(createRow(id,name,note));
+  document.getElementById(`name-${id}`).focus();
+}
+
+function removeSubject(id){
+  subjects=subjects.filter(s=>s!==id);
+  const row=document.getElementById(`row-${id}`);
+  if(row)row.remove();
+  if(subjects.length===0)addSubject();
+}
+
+function calculate(){
+  const data=subjects.map(id=>({
+    name:document.getElementById(`name-${id}`)?.value.trim()||'Sin nombre',
+    note:parseFloat(document.getElementById(`note-${id}`)?.value)||0
+  })).filter(d=>d.note>=0);
+
+  if(!data.length){toast('❗ Agrega al menos una nota');return}
+
+  const invalid=data.find(d=>d.note<0||d.note>100);
+  if(invalid){toast('❗ Las notas deben ser entre 0 y 100');return}
+
+  const avg=data.reduce((s,d)=>s+d.note,0)/data.length;
+  const pass=avg>=70;
+
+  document.getElementById('result-num').textContent=avg.toFixed(1);
+  document.getElementById('result-num').className=`result-num ${pass?'pass':'fail'}`;
+
+  const badge=document.getElementById('result-badge');
+  badge.textContent=pass?'✅ Aprobado':'❌ Reprobado';
+  badge.className=`result-badge ${pass?'pass':'fail'}`;
+
+  const msgs={
+    pass:[
+      '¡Excelente trabajo! Sigue así 🚀',
+      '¡Muy bien! Tu esfuerzo vale la pena 💪',
+      '¡Aprobado! Vas por buen camino ⭐'
+    ],
+    fail:[
+      'No te rindas, puedes mejorar 💪',
+      'Estudia un poco más, tú puedes 📚',
+      'Habla con tu profe para mejorar 🎯'
+    ]
+  };
+  const pool=pass?msgs.pass:msgs.fail;
+  document.getElementById('result-msg').textContent=pool[Math.floor(Math.random()*pool.length)];
+
+  const breakdown=document.getElementById('breakdown');
+  breakdown.innerHTML=data.map(d=>{
+    const cls=d.note>=80?'score-high':d.note>=70?'score-mid':'score-low';
+    return`<div class="breakdown-item"><span class="breakdown-name">${d.name}</span><span class="breakdown-score ${cls}">${d.note}</span></div>`;
+  }).join('');
+
+  const card=document.getElementById('result-card');
+  card.classList.add('show');
+  card.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function reset(){
+  document.getElementById('result-card').classList.remove('show');
+  subjects=[];
+  document.getElementById('subjects-list').innerHTML='';
+  addSubject();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// Init con 3 filas vacías
+addSubject();
+addSubject();
+addSubject();
+</script>
+</body>
 </html>
