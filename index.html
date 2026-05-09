@@ -101,6 +101,13 @@ main{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:3rem 1.5r
 .banner-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:10px;padding:.6rem 1.25rem;color:#fff;font-family:var(--font);font-weight:700;font-size:.85rem;cursor:pointer;text-decoration:none;white-space:nowrap;display:inline-block;transition:transform .15s,box-shadow .2s}
 .banner-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(79,70,229,.35)}
 
+/* FOOTER */
+footer{position:relative;z-index:1;text-align:center;padding:2rem 1.5rem 2.5rem;border-top:1px solid var(--border)}
+.footer-inner{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;color:var(--muted)}
+.footer-inner a{color:var(--muted);text-decoration:none;font-weight:600;transition:color .2s}
+.footer-inner a:hover{color:var(--text)}
+.footer-dot{width:3px;height:3px;background:var(--muted);border-radius:50%;opacity:.5}
+
 .toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:.75rem 1.1rem;font-size:.85rem;font-weight:600;z-index:999;transform:translateY(80px);opacity:0;transition:all .3s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 32px rgba(0,0,0,.4)}
 .toast.show{transform:translateY(0);opacity:1}
 
@@ -167,6 +174,15 @@ main{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:3rem 1.5r
     <a href="https://bfriasdicent-oss.github.io/planify/" target="_blank" class="banner-btn">Ir a Planify →</a>
   </div>
 </main>
+
+<footer>
+  <div class="footer-inner">
+    <span>Hecho con ♥ por</span>
+    <a href="#" target="_blank">Charro Labs</a>
+    <span class="footer-dot"></span>
+    <span>© 2025</span>
+  </div>
+</footer>
 
 <script>
 let subjects=[];
@@ -259,7 +275,6 @@ function toast(msg){
   setTimeout(()=>t.classList.remove('show'),2500);
 }
 
-// Init con 3 filas vacías
 addSubject();
 addSubject();
 addSubject();
