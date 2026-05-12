@@ -9,6 +9,11 @@
 <meta name="author" content="Charro Labs">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#4f46e5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Nexus">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Nexus — Calculadora de Promedio Escolar Gratis">
 <meta property="og:description" content="Calcula tu promedio escolar gratis y al instante. Sin registro. Para estudiantes de todo el mundo.">
@@ -173,11 +178,15 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.5rem 2.5rem;
 .thanks-text{display:flex;flex-direction:column;gap:.3rem}
 .thanks-text strong{font-size:.9rem;color:var(--text)}
 .thanks-text span{font-size:.8rem;color:var(--muted);line-height:1.6}
+.install-manual{display:flex;flex-direction:column;gap:.35rem}
+.install-step{font-size:.78rem;color:var(--muted);line-height:1.5}
+.install-step strong{color:var(--text)}
 
 @media(max-width:600px){
   .download-card{flex-direction:column;align-items:flex-start;padding:1.1rem}
   .btn-download{width:100%;justify-content:center}
-}
+  header{padding:0 1rem}
+  .header-sub{display:none}
   main{padding:1.5rem .9rem 5rem}
   .hero{padding:1.5rem 0 1.2rem}
   .hero h1{font-size:clamp(1.8rem,8vw,2.6rem)}
@@ -299,16 +308,12 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.5rem 2.5rem;
     <p style="font-size:.78rem;color:var(--muted);line-height:1.7">Nexus es una calculadora de promedio escolar gratuita para estudiantes de todo el mundo. Ingresa el nombre de cada materia — Matemáticas, Español, Ciencias, Historia, Inglés — y su nota en escala del 0 al 100. Nexus calcula tu promedio automáticamente y te indica si aprobaste. Sin registro, sin descargas, gratis para siempre.</p>
   </div>
 
-  <!-- SECCIÓN DE DESCARGA -->
+  <!-- SECCIÓN INSTALAR -->
   <div class="download-section" id="download-section">
     <div class="download-card" id="download-card">
       <div class="download-icon">
         <svg width="32" height="32" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="dlBg" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#06b6d4"/>
-            </linearGradient>
-          </defs>
+          <defs><linearGradient id="dlBg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient></defs>
           <rect width="42" height="42" rx="12" fill="url(#dlBg)"/>
           <line x1="11" y1="31" x2="11" y2="11" stroke="rgba(255,255,255,0.95)" stroke-width="3.5" stroke-linecap="round"/>
           <line x1="31" y1="31" x2="31" y2="11" stroke="rgba(255,255,255,0.95)" stroke-width="3.5" stroke-linecap="round"/>
@@ -316,15 +321,17 @@ footer{position:relative;z-index:1;text-align:center;padding:2rem 1.5rem 2.5rem;
         </svg>
       </div>
       <div class="download-info">
-        <div class="download-title">Nexus — Calculadora de Promedio</div>
-        <div class="download-sub">Archivo HTML · Funciona sin internet · Gratis</div>
+        <div class="download-title">Instalar Nexus en tu dispositivo</div>
+        <div class="download-sub">Úsala desde tu pantalla de inicio — sin internet</div>
       </div>
-      <button class="btn-download" onclick="downloadNexus()" aria-label="Descargar Nexus">
-        <span class="btn-download-icon">⬇</span> Descargar
+      <button class="btn-download" id="btn-install" aria-label="Instalar Nexus" style="display:none">
+        <span class="btn-download-icon">⬇</span> Instalar app
       </button>
+      <div class="install-manual" id="install-manual">
+        <div class="install-step">🤖 <strong>Android/Chrome:</strong> menú <strong>⋮</strong> → Añadir a pantalla inicio</div>
+        <div class="install-step">🍎 <strong>iPhone/Safari:</strong> botón <strong>compartir □↑</strong> → Agregar a inicio</div>
+      </div>
     </div>
-
-    <!-- Mensaje de gracias (aparece tras 8 segundos si no descargó) -->
     <div class="thanks-msg" id="thanks-msg">
       <div class="thanks-icon">🙏</div>
       <div class="thanks-text">
@@ -450,29 +457,39 @@ function toast(msg){
   setTimeout(()=>t.classList.remove('show'),2500);
 }
 
+// PWA install
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();
+  deferredPrompt=e;
+  const btn=document.getElementById('btn-install');
+  const manual=document.getElementById('install-manual');
+  btn.style.display='flex';
+  manual.style.display='none';
+});
+document.getElementById('btn-install').addEventListener('click',()=>{
+  if(!deferredPrompt)return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(r=>{
+    if(r.outcome==='accepted'){
+      document.getElementById('btn-install').style.display='none';
+      clearTimeout(window._thanksTimer);
+      document.getElementById('thanks-msg').classList.remove('show');
+    }
+    deferredPrompt=null;
+  });
+});
+if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{})}
+
 // Calcular con Enter en los inputs
 document.addEventListener('keydown',e=>{
   if(e.key==='Enter'&&e.target.tagName==='INPUT')calculate();
 });
 
-// Descarga directa
-function downloadNexus(){
-  const html=document.documentElement.outerHTML;
-  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;
-  a.download='Nexus.html';
-  a.click();
-  URL.revokeObjectURL(url);
-  clearTimeout(window._thanksTimer);
-  document.getElementById('thanks-msg').classList.remove('show');
-}
-
-// Mostrar mensaje de gracias si no descarga en 8s
+// Mostrar mensaje de gracias si no instala en 10s
 window._thanksTimer=setTimeout(()=>{
   document.getElementById('thanks-msg').classList.add('show');
-},8000);
+},10000);
 
 addSubject();addSubject();addSubject();
 </script>
